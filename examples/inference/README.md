@@ -1,8 +1,7 @@
 # Run PluRel pretrained RT on your own database
 
-A guided, three-step walkthrough for using a pretrained PluRel checkpoint to make
-predictions on **your own** relational database (DuckDB, Postgres, or MySQL) — no
-prior familiarity with RelBench or "task specs" needed.
+Run a pretrained checkpoint on your own database (DuckDB, Postgres, or MySQL) in
+three steps.
 
 You edit exactly one file, [`config.py`](config.py), then run three scripts in order:
 
@@ -63,10 +62,8 @@ inference over the test split, and reports the metric:
 [result] shop-demo/customer-churn   AUROC = 0.4115   (n=20)
 ```
 
-> The demo's churn labels are random noise, so chance-level AUROC (~0.5) is the
-> expected result here — the point of the demo is exercising the pipeline, not the
-> score. On real data with real signal (e.g. RelBench tasks), the zero-shot
-> checkpoint scores well above chance.
+> The demo's labels are random noise, so chance-level AUROC (~0.5) is expected —
+> the demo exercises the pipeline, not the model.
 
 ## Point it at your own database
 
@@ -86,8 +83,3 @@ Open [`config.py`](config.py) and set:
    entity column, time column, and target column). Only `test` is required.
 
 Then rerun the three steps. That's it.
-
-> [!NOTE]
-> All model/inference logic lives in [`pipeline.py`](pipeline.py) — you shouldn't
-> need to edit it. To use a local checkpoint instead of downloading, set `CHECKPOINT`
-> in `config.py`.
