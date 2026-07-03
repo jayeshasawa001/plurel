@@ -127,7 +127,7 @@ $ pixi run python scripts/synthetic_gen.py \
 | `--preprocess` | Run preprocessing and embedding steps. Omit to skip. |
 
 > [!NOTE]
-> Checkout notebooks in `examples/` for synthesizing from SQL schemas
+> See [`examples/generation/`](examples/generation/) for a notebook that synthesizes from a SQL schema.
 
 
 ## Download Preprocessed Data
@@ -191,6 +191,36 @@ The same Hub repo also hosts the checkpoints behind the PluRel rows on the
 - `finetune_<dataset>_<task>.pt`: fine-tuned per task from the
   matching `cntd-pretrain` checkpoint. These produce the "PluRel | pretrained +
   fine-tuned" row. All leaderboard numbers are full official test split.
+
+## Run Inference on Your Own Database
+
+Use a pretrained PluRel checkpoint to make predictions on **your own** relational
+database (DuckDB, Postgres, or MySQL). The guided walkthrough in
+[`examples/inference/`](examples/inference/) takes you from a SQL database to scored
+predictions in three steps — you edit one config file and run three scripts:
+
+```bash
+# (optional) build a tiny demo DuckDB so you can try the flow first
+$ pixi run python examples/inference/make_demo_duckdb.py
+
+$ pixi run python examples/inference/1_data_prep.py   # convert your DB to RelBench format
+$ pixi run python examples/inference/2_task_prep.py   # define the prediction task
+$ pixi run python examples/inference/3_predict.py     # download the model, predict, and score
+```
+
+Point it at your own data by editing [`examples/inference/config.py`](examples/inference/config.py)
+(connection URI, table schema, and the prediction task), then rerun the three steps.
+Step 3 downloads the checkpoint from the Hugging Face Hub, preprocesses the data, runs
+inference on the test split, and reports the metric (AUROC / MAE). See the
+[walkthrough README](examples/inference/README.md) for details.
+
+Requires the [Setup](#setup) environment (including the compiled Rust sampler).
+
+> [!NOTE]
+> Postgres and MySQL are read through SQLAlchemy — install the matching driver
+> (`psycopg2-binary` or `pymysql`). DuckDB files are read natively. Add `--device cpu`
+> to step 3 to run without a GPU, or set `CHECKPOINT` in `config.py` to use a local
+> checkpoint instead of downloading.
 
 ## Pretraining Experiments
 
