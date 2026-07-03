@@ -1,6 +1,6 @@
 [project]
 name = "plurel"
-version = "1.0.0"
+version = "1.1.0"
 description = "Synthesize diverse multi-tabular relational databases using Structural Causal Models, enabling scaling laws for Relational Foundation Models."
 readme = "README.md"
 requires-python = ">=3.12"

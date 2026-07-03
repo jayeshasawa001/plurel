@@ -4308,8 +4308,8 @@ packages:
   timestamp: 1764896838868
 - pypi: ./
   name: plurel
-  version: 1.0.0
-  sha256: 321d65324f7b252d72a96f6f8b8bdc408a2fb9ea705fb007b64921cf206d46a0
+  version: 1.1.0
+  sha256: 47b821424593fc821bfeb58509be168ae8d5cdbbf60f7071d3e9a3c0f8c9f9fc
   requires_dist:
   - networkx
   - numpy

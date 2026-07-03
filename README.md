@@ -19,6 +19,7 @@ for the ICLR 2026 paper [Relational Transformer: Toward Zero-Shot Foundation Mod
 
 ## Latest Updates
 
+- [07/2026] Released **v1.1.0** on [PyPI](https://pypi.org/project/plurel/) with the latest features and performance improvements.
 - [04/2026] PluRel is accepted to **ICML 2026!**
 
 ## Overview
@@ -45,7 +46,7 @@ pip install plurel
 Requires Python 3.12+. This installs the synthetic database generator only; the Rust context sampler and training scripts under `rt/` are part of the development setup below.
 
 > [!NOTE]
-> The published PyPI package tracks the `v1.0.0` release. The latest features and performance improvements live on `main` and may not yet be in a tagged release — install from source if you need them.
+> Development moves on `main` ahead of tagged releases. If you need features or fixes that have not yet been published to PyPI, install from source using the setup below.
 
 ## Setup
 
