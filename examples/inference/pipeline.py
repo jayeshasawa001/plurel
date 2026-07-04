@@ -148,17 +148,26 @@ def save_task_tables(db_name: str, task_name: str, split_tables: dict[str, Table
 # --------------------------------------------------------------------------- #
 # Step 3: preprocess -> infer -> evaluate
 # --------------------------------------------------------------------------- #
-def resolve_checkpoint(local_path, hf_repo, hf_filename) -> Path:
-    """Return a local checkpoint path, downloading from the HF Hub if needed."""
+def resolve_checkpoint(local_path, hf_repo, hf_filename) -> tuple[Path, dict]:
+    """Return (checkpoint path, model config), downloading from the HF Hub if needed.
+
+    The repo's config.json carries the architecture the checkpoint was trained with;
+    MODEL_DEFAULTS is the fallback for local checkpoints without one.
+    """
     if local_path:
         p = Path(local_path).expanduser()
         if not p.exists():
             raise FileNotFoundError(f"checkpoint not found: {p}")
-        return p
+        return p, dict(MODEL_DEFAULTS)
     from huggingface_hub import hf_hub_download
 
     print(f"   downloading checkpoint {hf_repo}/{hf_filename} from the HF Hub...")
-    return Path(hf_hub_download(repo_id=hf_repo, filename=hf_filename, repo_type="model"))
+    ckpt = Path(hf_hub_download(repo_id=hf_repo, filename=hf_filename, repo_type="model"))
+    cfg = dict(MODEL_DEFAULTS)
+    cfg.update(
+        json.loads(Path(hf_hub_download(repo_id=hf_repo, filename="config.json")).read_text())
+    )
+    return ckpt, cfg
 
 
 def ensure_preprocessed(db_name: str, embedding_model: str) -> None:
@@ -196,7 +205,7 @@ def ensure_preprocessed(db_name: str, embedding_model: str) -> None:
 
 
 @torch.inference_mode()
-def run_inference(config, ckpt: Path, device: str, batch_size: int, num_workers: int):
+def run_inference(config, ckpt: Path, device: str, batch_size: int, num_workers: int, cfg=None):
     """Run the checkpoint over the task's test split.
 
     Returns (entity_node_idx, timestamp, prediction) arrays — one entry per test
@@ -215,7 +224,7 @@ def run_inference(config, ckpt: Path, device: str, batch_size: int, num_workers:
     else:
         from rt.model import RelationalTransformer
 
-    cfg = MODEL_DEFAULTS
+    cfg = cfg or dict(MODEL_DEFAULTS)
     net = RelationalTransformer(
         num_blocks=cfg["num_blocks"],
         d_model=cfg["d_model"],

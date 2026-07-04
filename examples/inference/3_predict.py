@@ -35,16 +35,18 @@ def main():
         raise SystemExit("Run 1_data_prep.py and 2_task_prep.py first.")
 
     print("[step 3] resolving checkpoint")
-    ckpt = pipeline.resolve_checkpoint(config.CHECKPOINT, config.HF_REPO, config.HF_FILENAME)
+    ckpt, model_cfg = pipeline.resolve_checkpoint(
+        config.CHECKPOINT, config.HF_REPO, config.HF_FILENAME
+    )
 
     print("[step 3] preprocessing")
-    pipeline.ensure_preprocessed(config.DB_NAME, pipeline.MODEL_DEFAULTS["embedding_model"])
+    pipeline.ensure_preprocessed(config.DB_NAME, model_cfg["embedding_model"])
 
     print(
         f"[step 3] running inference on {config.DB_NAME}/{config.TASK['name']} (device={args.device})"
     )
     ent, ts, pred = pipeline.run_inference(
-        config, ckpt, args.device, args.batch_size, args.num_workers
+        config, ckpt, args.device, args.batch_size, args.num_workers, model_cfg
     )
     pipeline.evaluate(config, ent, ts, pred)
 
