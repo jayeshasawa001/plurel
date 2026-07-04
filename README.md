@@ -161,12 +161,12 @@ pixi run hf download hvag976/relational-transformer \
 
 ## Download Synthetic Pretrained Checkpoints
 
-The synthetic pretrained model checkpoints are hosted on the Hugging Face Hub at [kvignesh1420/relational-transformer-plurel](https://huggingface.co/kvignesh1420/relational-transformer-plurel/tree/main).
+The synthetic pretrained model checkpoints are hosted on the Hugging Face Hub at [stanford-star/rt-plurel](https://huggingface.co/stanford-star/rt-plurel/tree/main).
 
 ```bash
 $ mkdir -p ~/scratch/rt_hf_ckpts
 
-$ pixi run hf download kvignesh1420/relational-transformer-plurel \
+$ pixi run hf download stanford-star/rt-plurel \
     --repo-type model \
     --local-dir ~/scratch/rt_hf_ckpts
 ```

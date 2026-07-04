@@ -63,6 +63,6 @@ TASK = {
 # --- pretrained checkpoint ---------------------------------------------------
 # Downloaded from the Hugging Face Hub. Set CHECKPOINT to a local .pt path to
 # skip the download.
-HF_REPO = "kvignesh1420/relational-transformer-plurel"
+HF_REPO = "stanford-star/rt-plurel"
 HF_FILENAME = "synthetic-pretrain_rdb_1024_size_4b.pt"
 CHECKPOINT = None  # e.g. "~/scratch/rt_hf_ckpts/synthetic-pretrain_rdb_1024_size_4b.pt"
