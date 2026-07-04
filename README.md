@@ -4,7 +4,7 @@
 Synthetic Data unlocks Scaling Laws for Relational Foundation Models
 </p>
 
-[![Project Page](https://img.shields.io/badge/Project-Page-blue?style=flat&logo=github)](https://snap-stanford.github.io/plurel/)
+[![Project Page](https://img.shields.io/badge/Project-Page-blue?style=flat&logo=github)](https://star-project.stanford.edu/plurel)
 [![arXiv](https://img.shields.io/badge/arXiv-2602.04029-b31b1b?style=flat&logo=arxiv)](https://arxiv.org/abs/2602.04029)
 [![PyPI](https://img.shields.io/pypi/v/plurel.svg?style=flat&logo=pypi&logoColor=white)](https://pypi.org/project/plurel/)
 

@@ -44,7 +44,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://snap-stanford.github.io/plurel/"
+Homepage = "https://star-project.stanford.edu/plurel"
 Repository = "https://github.com/snap-stanford/plurel"
 Paper = "https://arxiv.org/abs/2602.04029"
 Issues = "https://github.com/snap-stanford/plurel/issues"
