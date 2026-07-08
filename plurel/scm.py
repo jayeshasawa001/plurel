@@ -63,6 +63,11 @@ class TSSourceGenFactory(SourceGenFactory):
             if table_type == TableType.Activity
             else scm_params.entity_table_ts_cycle_scale
         )
+        ar_rho = (
+            scm_params.ts_ar_rho_choices.sample_uniform()
+            if table_type == TableType.Activity
+            else scm_params.entity_table_ts_ar_rho
+        )
         return TSDataGenerator(
             num_points=num_rows,
             min_value=min_value,
@@ -74,7 +79,7 @@ class TSSourceGenFactory(SourceGenFactory):
             ),
             cycle_scale=cycle_scale,
             noise_scale=noise_scale,
-            ar_rho=scm_params.ts_ar_rho_choices.sample_uniform(),
+            ar_rho=ar_rho,
         )
 
     def make_categorical(self, scm_params, num_categories, num_rows, table_type):
