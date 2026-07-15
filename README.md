@@ -235,11 +235,11 @@ $ pixi run torchrun --standalone --nproc_per_node=1 scripts/cntd_pretrain.py
 If you find this work useful, please cite our paper:
 
 ```bibtex
-@article{kothapalli2026plurel,
-  title={{PluRel:} Synthetic Data unlocks Scaling Laws for Relational Foundation Models},
-  author={Kothapalli, Vignesh and Ranjan, Rishabh and Hudovernik, Valter and Dwivedi, Vijay Prakash and Hoffart, Johannes and Guestrin, Carlos and Leskovec, Jure},
-  journal={arXiv preprint arXiv:2602.04029},
-  year={2026}
+@inproceedings{kothapalli2026plurel,
+title={PluRel: Synthetic Data unlocks Scaling Laws for Relational Foundation Models},
+author={Vignesh Kothapalli and Rishabh Ranjan and Valter Hudovernik and Vijay Prakash Dwivedi and Johannes Hoffart and Carlos Guestrin and Jure Leskovec},
+booktitle={Forty-third International Conference on Machine Learning},
+year={2026}
 }
 ```
 
