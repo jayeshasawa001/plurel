@@ -276,6 +276,8 @@ pub fn main(cli: Cli) {
                 || table_name == "user-attendance"
             {
                 df = df.drop("index").unwrap();
+            }            
+            if table_name == "user-repeat" || table_name == "user-ignore" {
                 df = cast_col_to_bool(df, "target").unwrap();
             }
         }
